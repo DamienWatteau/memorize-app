@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       devise_scope :user do
         resource :user, only: %i[update show]
       end
-      resources :playlists, only: [:create, :update, :show, :destroy] do
+      resources :playlists do
         resources :words, only: [:create, :update, :destroy]
       end
       resources :settings, only: [] do

@@ -1,32 +1,63 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <b-navbar>
+      <template #brand>
+        <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <img :src="require('@/assets/logo.svg')" />
+        </b-navbar-item>
+      </template>
+      <template #start>
+        <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            {{$t('navbar.home')}}
+        </b-navbar-item>
+        <b-navbar-dropdown>
+          <template #label>
+              {{$t('navbar.extension')}}
+          </template>
+          <b-navbar-item @click="prompt">
+              {{$t('navbar.extensions.add_playlist')}}
+          </b-navbar-item>
+        </b-navbar-dropdown>
+      </template>
+
+      <template #end>
+        <b-navbar-item tag="div">
+          <div class="buttons">
+              <a class="button is-light">
+                {{$t('navbar.logout')}}
+              </a>
+          </div>
+        </b-navbar-item>
+      </template>
+    </b-navbar>
+    <div class="container is-max-widescreen">
+      <router-view/>
+    </div>
   </div>
 </template>
 
+<script>
+import { mapActions } from "vuex";
+export default {
+  methods: {
+    ...mapActions(["createPlaylist"]),
+    prompt(){
+      this.$buefy.dialog.prompt({
+        message: this.$t('playlist.create.title'),
+        trapFocus: true,
+        onConfirm: (value) => this.createPlaylist({name: value})
+      })
+    },
+  }
+}
+</script>
+
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  background-color: #EEE;
+  height: 100vh;
+  .navbar {
+    margin-bottom: 30px;
   }
 }
 </style>

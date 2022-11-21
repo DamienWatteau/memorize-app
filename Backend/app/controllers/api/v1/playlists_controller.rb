@@ -2,6 +2,10 @@ module Api::V1
   class PlaylistsController < Api::V1::ApiController
     before_action :set_playlist, only: [:show, :update, :destroy]
 
+    def index
+      render json: Playlist.all
+    end
+
     def create
       @playlist = Playlist.new(resource_params)
       if @playlist.save

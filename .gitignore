@@ -2,8 +2,8 @@
 *.rbc
 *.swp
 capybara-*.html
-/log
-/tmp
+Backend/log
+Backend/tmp
 /db/*.sqlite3
 /public/system
 /coverage/

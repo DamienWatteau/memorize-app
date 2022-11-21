@@ -1,0 +1,22 @@
+{
+  "navbar": {
+    "home": "Home",
+    "extension": "Add",
+    "extensions": {
+      "add_playlist": "Add playlist"
+    },
+    "logout": "Logout"
+  },
+  "card": {
+    "view": "View",
+    "delete": "Delete"
+  },
+  "confirm": {
+    "delete": "Are you sure to delete this element ?"
+  },
+  "playlist": {
+    "create": {
+      "title": "What's the playlist name ?"
+    }
+  }
+}
