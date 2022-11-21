@@ -17,6 +17,10 @@
   "playlist": {
     "create": {
       "title": "What's the playlist name ?"
-    }
+    },
+    "show": {
+      "title": "List to learn"
+    },
+    "quizz": "Launch quizz"
   }
 }
