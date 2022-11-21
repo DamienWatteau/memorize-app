@@ -141,7 +141,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_103902) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  create_table "word_attributes", force: :cascade do |t|
+  create_table "words", force: :cascade do |t|
     t.string "key"
     t.string "key_lang"
     t.string "value"
@@ -149,7 +149,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_21_103902) do
     t.bigint "playlist_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["playlist_id"], name: "index_word_attributes_on_playlist_id"
+    t.index ["playlist_id"], name: "index_words_on_playlist_id"
   end
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"

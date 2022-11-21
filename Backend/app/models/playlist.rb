@@ -9,5 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Playlist < ApplicationRecord
-  has_many :word_attributes, dependent: :destroy
+  has_many :words, dependent: :destroy
+  validates_presence_of :name
 end

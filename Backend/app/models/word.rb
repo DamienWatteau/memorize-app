@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: word_attributes
+# Table name: words
 #
 #  id          :bigint           not null, primary key
 #  key         :string
@@ -13,8 +13,8 @@
 #
 # Indexes
 #
-#  index_word_attributes_on_playlist_id  (playlist_id)
+#  index_words_on_playlist_id  (playlist_id)
 #
-class WordAttribute < ApplicationRecord
+class Word< ApplicationRecord
   belongs_to :playlist
 end
