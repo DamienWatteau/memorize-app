@@ -12,7 +12,7 @@ module Api::V1
     end
 
     def show
-      render json: @playlist
+      render json: @playlist, include: [:words]
     end
 
     def update
@@ -24,12 +24,16 @@ module Api::V1
     end
 
     def destroy
-      @playlist.destroy
+      if @playlist.destroy
+        render json: {}, status: :ok
+      else
+        render json: @playlist.errors, status: :unprocessable_entity
+      end
     end
 
     private
       def set_playlist
-        @playlist = Playlist.find_by(id: resource_params[:id])
+        @playlist = Playlist.find(resource_params[:id])
       end
 
       def resource_params

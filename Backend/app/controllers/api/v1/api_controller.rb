@@ -21,7 +21,7 @@ module Api
 
       private
 
-      def render_not_found(exception)
+      def render_not_found(exception="")
         logger.info { exception } # for logging
         render json: { error: I18n.t('api.errors.not_found') }, status: :not_found
       end
