@@ -24,7 +24,7 @@
         <template #end>
           <b-navbar-item tag="div">
             <div class="buttons">
-                <a class="button is-light">
+                <a class="button is-light" @click="logout">
                   {{$t('navbar.logout')}}
                 </a>
             </div>
@@ -45,7 +45,7 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   methods: {
-    ...mapActions(["createPlaylist"]),
+    ...mapActions(["createPlaylist", "logout"]),
     prompt(){
       this.$buefy.dialog.prompt({
         message: this.$t('playlist.create.title'),
