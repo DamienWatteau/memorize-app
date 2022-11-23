@@ -13,10 +13,7 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 Vue.use(Buefy);
 
-import VueSweetalert2 from 'vue-sweetalert2';
 import i18n from './i18n'
-// import 'sweetalert2/dist/sweetalert2.min.css';
-Vue.use(VueSweetalert2);
 
 Vue.config.productionTip = false
 
