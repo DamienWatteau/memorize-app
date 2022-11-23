@@ -1,12 +1,12 @@
 <template>
-  <div class="login columns is-multiline">
+  <div class="register columns is-multiline">
     <div class="column is-narrow is-offset-4 is-3">
       <div class="card">
         <div class="card-content">
           <p class="title">
-            {{$t("login.title")}}
+            {{$t("register.title")}}
           </p>
-          <form @submit.prevent="authenticate">
+          <form @submit.prevent="addUser">
             <b-field :label="$t('form.email')">
               <b-input v-model="form.email"></b-input>
             </b-field>
@@ -16,7 +16,7 @@
                 password-reveal>
               </b-input>
             </b-field>
-            <input class="button is-primary margin-bottom" :value="$t('form.submit')" type="submit" @click.prevent="authenticate" />
+            <input class="button is-primary margin-bottom" :value="$t('form.submit')" type="submit" @click.prevent="addUser" />
           </form>
         </div>
       </div>
@@ -39,9 +39,9 @@ export default {
     ...mapGetters(["isLoggedIn"])
   },
   methods: {
-    ...mapActions(["login"]),
-    authenticate(){
-      this.login({user: this.form});
+    ...mapActions(["createUser"]),
+    addUser(){
+      this.createUser({user: this.form});
     }
   },
   created() {

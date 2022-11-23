@@ -24,11 +24,14 @@
     "quizz": "Launch quizz"
   },
   "login": {
-    "title": "Login",
-    "email": "Email :",
-    "password": "Password :"
+    "title": "Login"
+  },
+  "register": {
+    "title": "Register"
   },
   "form": {
-    "submit": "Submit"
+    "submit": "Submit",
+    "email": "Email :",
+    "password": "Password :"
   }
 }

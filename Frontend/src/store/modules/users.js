@@ -49,5 +49,14 @@ export default {
         commit("clearSession");
       })
     },
+    async createUser({commit}, payload){
+      axios.post("/users", payload).then((response) => {
+        if (response.data){
+          localStorage.clear();
+          commit("auth", response);
+          router.push("/");
+        }
+      })
+    },
   },
 }
