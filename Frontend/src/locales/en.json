@@ -22,5 +22,10 @@
       "title": "List to learn"
     },
     "quizz": "Launch quizz"
+  },
+  "login": {
+    "title": "Login",
+    "email": "Email :",
+    "password": "Password :"
   }
 }

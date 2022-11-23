@@ -4,13 +4,13 @@
       <div class="card">
         <div class="card-content">
           <p class="title">
-            Login
+            {{$t("login.title")}}
           </p>
           <form @submit.prevent="authenticate">
-            <b-field label="Email">
+            <b-field :label="$t('login.email')">
               <b-input v-model="form.email"></b-input>
             </b-field>
-            <b-field label="Password">
+            <b-field :label="$t('login.password')">
               <b-input type="password"
                 v-model="form.password"
                 password-reveal>
