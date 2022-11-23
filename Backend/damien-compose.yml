@@ -11,6 +11,7 @@ services:
       SERVEUR_HOST: 'localhost'
       PASSWORD_RESET_URL: '/'
       RAILS_ENV: 'development'
+      SERVER_HOST: 'localhost'
     ports:
       - 3000:3000
     volumes:

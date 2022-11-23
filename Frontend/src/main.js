@@ -20,10 +20,28 @@ Vue.use(VueSweetalert2);
 
 Vue.config.productionTip = false
 
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'Learning';
-  next();
-});
+axios.interceptors.request.use(
+  (config) => {
+    if(localStorage.getItem("auth") != undefined){
+      config.headers =  JSON.parse(localStorage.getItem("auth"))
+    }
+    config.headers["Content-Type"] = "application/json";
+    return config;
+  }
+)
+
+axios.interceptors.response.use(
+  (response) => {return response;},
+  (error) => {
+    if(error.response.status == 401 || error.response.status == status.UNAUTHORIZED){
+      // Erreur
+      store.commit("clearSession");
+    }
+    if(error.response.status == status.UNPROCESSABLE_ENTITY){
+      // Erreur
+    }
+  }
+)
 
 
 new Vue({

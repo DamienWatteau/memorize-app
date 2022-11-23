@@ -11,7 +11,8 @@ module Api
       end
 
       def render_create_success
-        render :create
+        usr = resource_data
+        render json: {user: usr}
       end
     end
   end

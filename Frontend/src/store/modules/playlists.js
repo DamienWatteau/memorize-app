@@ -1,8 +1,5 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
 import axios from 'axios'
 
-Vue.use(Vuex)
 /* eslint-disable */
 export default {
   state: {
@@ -20,7 +17,7 @@ export default {
   actions: {
     async getPlaylists({commit}){
       axios.get("playlists").then((response) => {
-        if (response.data)
+        if (response && response.data)
           commit("setPlaylists", response.data);
       })
     },
