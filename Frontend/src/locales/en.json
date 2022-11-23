@@ -27,5 +27,8 @@
     "title": "Login",
     "email": "Email :",
     "password": "Password :"
+  },
+  "form": {
+    "submit": "Submit"
   }
 }

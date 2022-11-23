@@ -16,7 +16,7 @@
                 password-reveal>
               </b-input>
             </b-field>
-            <input class="button is-primary margin-bottom" type="submit" @click.prevent="authenticate" />
+            <input class="button is-primary margin-bottom" :value="$t('form.submit')" type="submit" @click.prevent="authenticate" />
           </form>
         </div>
       </div>
