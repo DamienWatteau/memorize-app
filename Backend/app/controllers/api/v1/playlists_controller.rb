@@ -3,11 +3,12 @@ module Api::V1
     before_action :set_playlist, only: [:show, :update, :destroy]
 
     def index
-      render json: Playlist.all
+      render json: current_user.playlists
     end
 
     def create
       @playlist = Playlist.new(resource_params)
+      @playlist.user = current_user
       if @playlist.save
         render json: {}, status: :created
       else
