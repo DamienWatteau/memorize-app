@@ -16,6 +16,8 @@
 class Playlist < ApplicationRecord
   belongs_to :user
   has_many :words, dependent: :destroy
-  
+
   validates_presence_of :name
+
+  accepts_nested_attributes_for :words
 end

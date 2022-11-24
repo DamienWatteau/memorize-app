@@ -1,4 +1,6 @@
 import axios from 'axios'
+import router from "@/router/index"
+import Vue from 'vue'
 
 /* eslint-disable */
 export default {
@@ -13,6 +15,15 @@ export default {
   mutations: {
     setPlaylists: (state, value) => state.playlists = value,
     setPlaylist: (state, value) => state.playlist = value,
+    setWord: (state, value) => {
+      state.playlist.words.push(value);
+    },
+    removeWordByIndex: (state, index) => {
+      state.playlist.words.splice(index, 1);
+    },
+    removeWordById: (state, value) => {
+      state.playlist = state.playlist.words.filter(f => f["id"] != value)
+    }
   },
   actions: {
     async getPlaylists({commit}){
@@ -21,12 +32,16 @@ export default {
           commit("setPlaylists", response.data);
       })
     },
-    async createPlaylist({}, payload){
-      axios.post("playlists", payload)
+    async createPlaylist({commit}, payload){
+      axios.post("playlists", payload).then((response) => {
+        if (response && response.data){
+          commit("setPlaylist", response.data);
+          router.push({name: "show_playlist", params: {id: response.data["id"]}})
+        }
+      })
     },
     async getPlaylist({commit}, payload){
-      console.log("aaa")
-      axios.get("playlists", payload["id"]).then((response) => {
+      axios.get(`playlists/${payload["id"]}`).then((response) => {
         if (response.data)
           commit("setPlaylist", response.data);
       })
@@ -35,6 +50,24 @@ export default {
       axios.delete(`playlists/${payload["id"]}`).then((response) => {
         if(response.status == 200){
           dispatch("getPlaylists");
+        }
+      })
+    },
+    async removeWord({commit}, payload){
+      axios.delete(`playlists/${payload["playlist_id"]}/words/${payload["id"]}`).then((response) => {
+        if(response.status == 200){
+          commit("removeWordById", payload["id"]);
+        }
+      })
+    },
+    async savePlaylist({state, commit}, payload){
+      axios.put(`playlists/${payload["id"]}`, state.playlist).then((response) => {
+        if(response.status == 200){
+          commit("setPlaylist", response.data);
+          console.log(this.app);
+          Vue.notify({
+            title: 'Success'
+          })
         }
       })
     },

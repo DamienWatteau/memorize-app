@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import ShowPlaylist from '../views/Playlists/Show.vue'
+
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
+
+import ShowPlaylist from '../views/Playlists/Show.vue'
 
 import store from '@/store/index'
 
@@ -17,12 +19,6 @@ const routes = [
     meta: {auth: true}
   },
   {
-    path: '/playlists/new',
-    name: 'Show playlist',
-    component: ShowPlaylist,
-    meta: {auth: true}
-  },
-  {
     path: '/login',
     name: 'login',
     component: Login
@@ -32,6 +28,12 @@ const routes = [
     name: 'register',
     component: Register
   },
+  {
+    path: '/playlists/:id',
+    name: 'show_playlist',
+    component: ShowPlaylist,
+    meta: {auth: true}
+  }
 ]
 
 const router = new VueRouter({

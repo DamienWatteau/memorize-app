@@ -19,7 +19,8 @@
       "title": "What's the playlist name ?"
     },
     "show": {
-      "title": "List to learn"
+      "title": "List to learn",
+      "loading": "Loading playlist ..."
     },
     "quizz": "Launch quizz"
   },

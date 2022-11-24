@@ -15,6 +15,9 @@ Vue.use(Buefy);
 
 import i18n from './i18n'
 
+import Notifications from 'vue-notification'
+Vue.use(Notifications)
+
 Vue.config.productionTip = false
 
 axios.interceptors.request.use(

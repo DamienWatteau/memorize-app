@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <notifications />
     <div v-if="isLoggedIn">
       <b-navbar>
         <template #brand>

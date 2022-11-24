@@ -10,7 +10,7 @@ module Api::V1
       @playlist = Playlist.new(resource_params)
       @playlist.user = current_user
       if @playlist.save
-        render json: {}, status: :created
+        render json: @playlist, status: :created
       else
         render json: @playlist.errors, status: :unprocessable_entity
       end
@@ -21,8 +21,11 @@ module Api::V1
     end
 
     def update
-      if @playlist.update(resource_params)
-        render json: {}, status: :ok
+      attributes = resource_params.as_json
+      attributes["words_attributes"] = attributes["words"]
+      attributes.delete("words")
+      if @playlist.update(attributes)
+        render json: @playlist, include: [:words], status: :ok
       else
         render json: @playlist.errors, status: :unprocessable_entity
       end
@@ -42,7 +45,7 @@ module Api::V1
       end
 
       def resource_params
-        params.permit(:id, :name, :visible)
+        params.permit(:id, :name, :visible, :words => [:id, :key, :value])
       end
   end
 end
