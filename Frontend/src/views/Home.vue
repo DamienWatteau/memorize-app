@@ -13,7 +13,7 @@
         </div>
         <footer class="card-footer">
           <div class="card-footer-item buttons">
-            <b-button class="is-primary" icon-left="eye">{{$t('card.view')}}</b-button>
+            <b-button class="is-primary" icon-left="eye" @click="$router.push({name: 'show_playlist', params: {id: playlist.id}})">{{$t('card.view')}}</b-button>
             <b-button class="is-danger" icon-left="delete" @click="confirmDelete(playlist.id)">{{$t('card.delete')}}</b-button>
           </div>
         </footer>
