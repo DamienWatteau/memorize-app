@@ -42,7 +42,7 @@ const router = new VueRouter({
 export default router
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || 'Learning';
+  document.title = to.meta.title || 'Memorize';
   if(to.matched.some((record) => record.meta.auth)){
     if(store.getters.isLoggedIn){
       next();
