@@ -3,6 +3,9 @@
     <div v-if="this.playlist != undefined">
       <div class="box">
         <div class="columns is-multiline">
+          <div class="column is-12">
+            <h1 class="title is-2">{{$t('playlist.show.title')}} {{playlist.name}}</h1>
+          </div>
           <b-table
             class="column is-12"
             :data="playlist.words">

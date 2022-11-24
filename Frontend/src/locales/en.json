@@ -18,8 +18,11 @@
     "create": {
       "title": "What's the playlist name ?"
     },
+    "index": {
+      "title": "List to learn"
+    },
     "show": {
-      "title": "List to learn",
+      "title": "Playlist :",
       "loading": "Loading playlist ..."
     },
     "quizz": "Launch quizz"
