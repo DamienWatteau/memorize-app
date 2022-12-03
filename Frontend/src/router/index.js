@@ -7,6 +7,8 @@ import Register from '@/views/Register.vue'
 
 import ShowPlaylist from '../views/Playlists/Show.vue'
 
+import StartQuizz from '../views/Quizz/Start.vue'
+
 import store from '@/store/index'
 
 Vue.use(VueRouter)
@@ -33,6 +35,12 @@ const routes = [
     name: 'show_playlist',
     component: ShowPlaylist,
     meta: {auth: true}
+  },
+  {
+    path: "/quizz",
+    name: "quizz",
+    component: StartQuizz,
+    meta:  {auth: true}
   }
 ]
 

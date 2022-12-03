@@ -2,7 +2,7 @@
   <div class="home columns is-multiline">
     <div class="box column is-12">
       <h1 class="title is-3 launch-quizz">{{$t('playlist.index.title')}}</h1>
-      <b-button class="is-info is-light">{{$t('playlist.quizz')}}</b-button>
+      <b-button class="is-info is-light" tag="router-link" :to="{'name': 'quizz'}">{{$t('playlist.quizz')}}</b-button>
     </div>
     <div class="column is-narrow is-one-quarter" v-for="playlist in playlists" :key="playlist.name">
       <div class="card">

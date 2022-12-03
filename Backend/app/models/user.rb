@@ -41,6 +41,7 @@ class User < ApplicationRecord
   before_validation :init_uid
 
   has_many :playlists
+  has_many :words, through: :playlists
 
   def full_name
     return username if first_name.blank?

@@ -21,6 +21,9 @@ Rails.application.routes.draw do
       resources :settings, only: [] do
         get :must_update, on: :collection
       end
+
+      resource :quizz, only: [:show], controller: "quizz"
+
     end
   end
 end

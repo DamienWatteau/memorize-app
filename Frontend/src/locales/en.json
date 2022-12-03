@@ -43,5 +43,9 @@
     "submit": "Submit",
     "email": "Email :",
     "password": "Password :"
+  },
+  "quizz": {
+    "numberOfWrongWords": "{number} wrongs",
+    "numberOfValidWords": "{number} valids"
   }
 }
