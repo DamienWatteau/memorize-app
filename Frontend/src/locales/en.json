@@ -28,10 +28,16 @@
     "quizz": "Launch quizz"
   },
   "login": {
-    "title": "Login"
+    "title": "Login",
+    "actions": {
+      "create_account": "Create account"
+    }
   },
   "register": {
-    "title": "Register"
+    "title": "Register",
+    "actions": {
+      "account_already_created": "Account already created ?"
+    }
   },
   "form": {
     "submit": "Submit",

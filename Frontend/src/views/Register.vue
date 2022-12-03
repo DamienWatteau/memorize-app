@@ -18,6 +18,8 @@
             </b-field>
             <input class="button is-primary margin-bottom" :value="$t('form.submit')" type="submit" @click.prevent="addUser" />
           </form>
+          <hr>
+          <b-button tag="router-link" :to="{'name': 'login'}">{{$t('register.actions.account_already_created')}}</b-button>
         </div>
       </div>
     </div>
