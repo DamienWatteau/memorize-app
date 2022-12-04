@@ -4,7 +4,7 @@
       <div class="box">
         <div class="columns is-multiline">
           <div class="column is-12">
-            <h1 class="title is-2">{{$t('playlist.show.title')}} {{playlist.name}}</h1>
+            <h1 class="title is-2">{{$t('playlist.show.title')}} {{playlist.name}} ({{playlist.words.length}} words)</h1>
           </div>
           <b-table
             class="column is-12"
@@ -60,7 +60,7 @@ export default {
     ...mapActions(["getPlaylist", "removeWord", "savePlaylist"]),
     ...mapMutations(["setWord", "removeWordByIndex"]),
     addWord(){
-      this.setWord(this.word_pattern)
+      this.setWord({...this.word_pattern})
     },
     deleteWord(props){
       if(props.row.id == undefined){
