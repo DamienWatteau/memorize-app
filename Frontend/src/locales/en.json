@@ -28,21 +28,23 @@
     "quizz": "Launch quizz"
   },
   "login": {
-    "title": "Login",
-    "actions": {
-      "create_account": "Create account"
+    "title": "Already an account ?",
+    "form": {
+      "submit": "Login"
     }
   },
   "register": {
-    "title": "Register",
-    "actions": {
-      "account_already_created": "Account already created ?"
+    "title": "New ?",
+    "form": {
+      "submit": "Create account"
     }
   },
   "form": {
     "submit": "Submit",
     "email": "Email :",
-    "password": "Password :"
+    "password": "Password :",
+    "first_name": "First name",
+    "last_name": "Last name"
   },
   "quizz": {
     "numberOfWrongWords": "{number} wrongs",

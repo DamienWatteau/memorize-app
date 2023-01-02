@@ -1,26 +1,32 @@
 <template>
-  <div class="register columns is-multiline">
-    <div class="column is-narrow is-offset-4 is-3">
-      <div class="card">
-        <div class="card-content">
-          <p class="title">
-            {{$t("register.title")}}
-          </p>
-          <form @submit.prevent="addUser">
-            <b-field :label="$t('form.email')">
-              <b-input v-model="form.email"></b-input>
-            </b-field>
-            <b-field :label="$t('form.password')">
-              <b-input type="password"
-                v-model="form.password"
-                password-reveal>
-              </b-input>
-            </b-field>
-            <input class="button is-primary margin-bottom" :value="$t('form.submit')" type="submit" @click.prevent="addUser" />
-          </form>
-          <hr>
-          <b-button tag="router-link" :to="{'name': 'login'}">{{$t('register.actions.account_already_created')}}</b-button>
-        </div>
+  <div class="column is-narrow is-4">
+    <div class="card">
+      <div class="card-content">
+        <p class="title">
+          {{$t("register.title")}}
+        </p>
+        <form @submit.prevent="addUser">
+          <b-field :label="$t('form.first_name')">
+            <b-input type="text"
+              v-model="form.first_name">
+            </b-input>
+          </b-field>
+          <b-field :label="$t('form.last_name')">
+            <b-input type="text"
+              v-model="form.last_name">
+            </b-input>
+          </b-field>
+          <b-field :label="$t('form.email')">
+            <b-input v-model="form.email"></b-input>
+          </b-field>
+          <b-field :label="$t('form.password')">
+            <b-input type="password"
+              v-model="form.password"
+              password-reveal>
+            </b-input>
+          </b-field>
+          <input class="button is-primary margin-bottom" :value="$t('register.form.submit')" type="submit" @click.prevent="addUser" />
+        </form>
       </div>
     </div>
   </div>
@@ -32,6 +38,8 @@ export default {
   data: function(){
     return {
       form: {
+        first_name: "",
+        last_name: "",
         email: "",
         password: ""
       }
@@ -45,13 +53,7 @@ export default {
     addUser(){
       this.createUser({user: this.form});
     }
-  },
-  created() {
-    if(this.isLoggedIn)
-      this.$router.push("/");
   }
 }
 </script>
-<style lang="scss" scoped>
-.card {margin-top: 20px;}
-</style>
+<style lang="scss" scoped></style>

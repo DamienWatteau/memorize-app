@@ -37,8 +37,18 @@ axios.interceptors.response.use(
       // Erreur
       store.commit("clearSession");
     }
-    if(error.response.status == status.UNPROCESSABLE_ENTITY){
-      // Erreur
+    console.log(error.response)
+    if(error.response.statusText == "Unprocessable Entity"){
+      if(error.response && error.response.data && error.response.data.errors){
+        console.log("aaaa")
+        Vue.notify({
+          type: "error",
+          title: 'Error',
+          duration: 10000,
+          text: error.response.data.errors.full_messages.join("<br/>")
+        })
+      }
+
     }
   }
 )
