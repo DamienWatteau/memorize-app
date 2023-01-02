@@ -80,7 +80,7 @@ export default {
     }
   },
   created() {
-    this.getQuizz().then(() => {
+    this.getQuizz({id: this.$route.query.id}).then(() => {
       this.loading = false;
     });
   }

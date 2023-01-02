@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     ...mapActions(["getPlaylist", "removeWord", "savePlaylist"]),
-    ...mapMutations(["setWord", "removeWordByIndex"]),
+    ...mapMutations(["setPlaylist", "setWord", "removeWordByIndex"]),
     addWord(){
       this.setWord({...this.word_pattern})
     },
@@ -78,6 +78,9 @@ export default {
     if(this.playlist == undefined){
       this.getPlaylist({id: playlistId});
     }
+  },
+  destroyed() {
+    this.setPlaylist(null);
   }
 }
 </script>

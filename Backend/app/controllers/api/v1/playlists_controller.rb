@@ -10,7 +10,7 @@ module Api::V1
       @playlist = Playlist.new(resource_params)
       @playlist.user = current_user
       if @playlist.save
-        render json: @playlist, status: :created
+        render json: @playlist, include: [:words], status: :created
       else
         render json: @playlist.errors, status: :unprocessable_entity
       end

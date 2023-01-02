@@ -12,14 +12,6 @@
           <b-navbar-item tag="router-link" :to="{ path: '/' }">
               {{$t('navbar.home')}}
           </b-navbar-item>
-          <b-navbar-dropdown>
-            <template #label>
-                {{$t('navbar.extension')}}
-            </template>
-            <b-navbar-item @click="prompt">
-                {{$t('navbar.extensions.add_playlist')}}
-            </b-navbar-item>
-          </b-navbar-dropdown>
         </template>
 
         <template #end>
@@ -32,7 +24,7 @@
           </b-navbar-item>
         </template>
       </b-navbar>
-      <div class="container is-max-widescreen">
+      <div class="container is-fullhd">
         <router-view/>
       </div>
     </div>
@@ -46,14 +38,7 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   methods: {
-    ...mapActions(["createPlaylist", "logout"]),
-    prompt(){
-      this.$buefy.dialog.prompt({
-        message: this.$t('playlist.create.title'),
-        trapFocus: true,
-        onConfirm: (value) => this.createPlaylist({name: value})
-      })
-    },
+    ...mapActions(["logout"]),
   },
   computed: {
     ...mapGetters(["isLoggedIn"])
