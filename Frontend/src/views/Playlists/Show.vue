@@ -23,14 +23,17 @@
                 <b-button class="is-danger" icon-left="delete" @click="deleteWord(props)"></b-button>
             </b-table-column>
           </b-table>
-          <div class="end column is-12 add-action" @click="addWord">
-            <b-icon
-              pack="fas"
-              icon="plus"
-              size="is-medium"
-              @click="addWord"
-              >
-            </b-icon>
+          <div class="end column is-12 add-action">
+            <div @click="addWords">
+              <b-icon
+                pack="fas"
+                icon="plus"
+                size="is-large"
+                @click="addWords"
+                >
+              </b-icon>
+            </div>
+            <b-field><b-input type="number" v-model="add_form.number"></b-input></b-field>
           </div>
         </div>
       </div>
@@ -47,6 +50,9 @@ import { mapGetters, mapActions, mapMutations } from "vuex";
 export default {
   data: function(){
     return {
+      add_form: {
+        number: 1
+      },
       table: {
         columns: ["key", "value"]
       },
@@ -59,8 +65,10 @@ export default {
   methods: {
     ...mapActions(["getPlaylist", "removeWord", "savePlaylist"]),
     ...mapMutations(["setPlaylist", "setWord", "removeWordByIndex"]),
-    addWord(){
-      this.setWord({...this.word_pattern})
+    addWords(){
+      for(let i = 0; i < this.add_form.number; i+=1) {
+        this.setWord({...this.word_pattern})
+      }
     },
     deleteWord(props){
       if(props.row.id == undefined){
@@ -85,5 +93,14 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.add-action {text-align: center;}
+.add-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+<style lang="scss">
+.add-action {
+  input {margin-left: 10px; width: 80px;}
+}
 </style>

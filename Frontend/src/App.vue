@@ -44,7 +44,7 @@ export default {
     ...mapGetters(["isLoggedIn"])
   },
   created() {
-    if(this.isLoggedIn && this.$route.name != "login")
+    if(this.isLoggedIn != true && this.$route.name != "login")
       this.$router.push("/");
   }
 }
@@ -53,7 +53,6 @@ export default {
 <style lang="scss">
 #app {
   background-color: #EEE;
-  height: 100vh;
   .navbar {
     margin-bottom: 30px;
   }
