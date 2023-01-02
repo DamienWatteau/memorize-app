@@ -57,6 +57,10 @@ export default {
   },
   computed: {
     ...mapGetters(["isLoggedIn"])
+  },
+  created() {
+    if(this.isLoggedIn && this.$route.name != "login")
+      this.$router.push("/");
   }
 }
 </script>
