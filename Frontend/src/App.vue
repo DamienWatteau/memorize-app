@@ -52,6 +52,7 @@ export default {
 
 <style lang="scss">
 #app {
+  min-height: 100vh;
   background-color: #EEE;
   .navbar {
     margin-bottom: 30px;
