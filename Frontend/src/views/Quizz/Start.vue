@@ -29,6 +29,7 @@
             ></v-text-field>
             <v-btn class="ma-2" color="primary" @click.prevent="checkResponse">{{$t('form.submit')}}</v-btn>
             <v-btn class="ma-2" color="secondary" @click="visible = true;">Montrer le mot</v-btn>
+            <v-btn class="ma-2" color="secondary" @click="saveStatus(true)">Passer le mot en valide</v-btn>
           </v-form>
         </v-card-text>
       </v-card>
@@ -93,9 +94,13 @@ export default {
   methods: {
     ...mapActions(["getQuizz", "setWordStatus", "resetWords"]),
     checkResponse(){
+      let status = this.form.value.toLowerCase() == this.getCurrentWordToGuess.toLowerCase();
+      this.saveStatus(status);
+    },
+    saveStatus(status){
       this.visible = false;
       let payload = this.currentWord;
-      payload["valid"] = this.form.value.toLowerCase() == this.getCurrentWordToGuess.toLowerCase();
+      payload["valid"] = status;
       this.setWordStatus(payload).then(() => {
         this.form.value = "";
       });
