@@ -1,48 +1,57 @@
 <template>
-  <div class="show-playlist">
-    <div v-if="this.playlist != undefined">
-      <div class="box">
-        <div class="columns is-multiline">
-          <div class="column is-12">
-            <h1 class="title is-2">{{$t('playlist.show.title')}} {{playlist.name}} ({{playlist.words.length}} words)</h1>
-          </div>
-          <b-table
-            class="column is-12"
-            :data="playlist.words">
-
-            <b-table-column field="key" label="" v-slot="props">
-                <b-field><b-input v-model="props.row.key"></b-input></b-field>
-            </b-table-column>
-
-            <b-table-column field="value" label="" v-slot="props">
-                <b-field><b-input v-model="props.row.value"></b-input></b-field>
-            </b-table-column>
-
-            <b-table-column field="action" label="" v-slot="props">
-                <!-- {{props}} -->
-                <b-button class="is-danger" icon-left="delete" @click="deleteWord(props)"></b-button>
-            </b-table-column>
-          </b-table>
-          <div class="end column is-12 add-action">
+  <v-row>
+    <v-col cols="8" offset="2" v-if="this.playlist != undefined">
+      <v-card elevation="4">
+        <v-card-title>
+          <h2>{{$t('playlist.show.title')}} {{playlist.name}} ({{playlist.words.length}} words)</h2>
+        </v-card-title>
+        <v-card-text>
+          <div class="add-action" v-if="playlist.words.length > 10">
             <div @click="addWords">
-              <b-icon
-                pack="fas"
-                icon="plus"
-                size="is-large"
-                @click="addWords"
-                >
-              </b-icon>
+              <v-icon right>mdi-plus-circle</v-icon>
             </div>
-            <b-field><b-input type="number" v-model="add_form.number"></b-input></b-field>
+            <v-text-field type="number" v-model.number="add_form.number"></v-text-field>
           </div>
-        </div>
-      </div>
-        <b-button type="is-primary" @click="submitPlaylist">Valider</b-button>
-    </div>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+          <v-data-table
+            :search="search"
+            :headers="headers"
+            :items="playlist.words"
+            :footer-props="{'items-per-page-options':[30, 50, 100, -1]}"
+            v-if="playlist.words != undefined">
+
+            <template v-slot:[`item.key`]="{ item }">
+              <v-text-field v-model="item.key"></v-text-field>
+            </template>
+            <template v-slot:[`item.value`]="{ item }">
+              <v-text-field v-model="item.value"></v-text-field>
+            </template>
+            <template v-slot:[`item.id`]="{ item }">
+              <div class="text-center">
+                <v-btn dense color="error" @click="deleteWord(item)"><v-icon dark>mdi-trash-can</v-icon></v-btn>
+              </div>
+            </template>
+          </v-data-table>
+          <div class="add-action">
+            <div @click="addWords">
+              <v-icon right>mdi-plus-circle</v-icon>
+            </div>
+            <v-text-field type="number" v-model.number="add_form.number"></v-text-field>
+          </div>
+          <v-btn color="primary" @click="submitPlaylist">Valider</v-btn>
+        </v-card-text>
+      </v-card>
+    </v-col>
     <p v-else>
       {{$t('playlist.show.loading')}}
     </p>
-  </div>
+  </v-row>
 </template>
 
 <script>
@@ -56,7 +65,13 @@ export default {
       table: {
         columns: ["key", "value"]
       },
-      word_pattern: {"key":"", "key_lang": "", "value": "", "value_lang": ""}
+      word_pattern: {"key":"", "key_lang": "", "value": "", "value_lang": ""},
+      headers: [
+        { text: '', value: 'key' },
+        { text: '', value: 'value' },
+        { text: '', value: 'id' }
+      ],
+      search: ""
     }
   },
   computed: {
@@ -70,11 +85,11 @@ export default {
         this.setWord({...this.word_pattern})
       }
     },
-    deleteWord(props){
-      if(props.row.id == undefined){
-        this.removeWordByIndex(props.index);
+    deleteWord(item){
+      if(item.id == undefined){
+        this.removeWordByIndex(item.index);
       } else {
-        this.removeWord({id: props.row.id, playlist_id: this.$route.params["id"]})
+        this.removeWord({id: item.id, playlist_id: this.$route.params["id"]})
       }
     },
     submitPlaylist(){

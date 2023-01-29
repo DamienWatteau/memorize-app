@@ -16,13 +16,13 @@ export default {
     setPlaylists: (state, value) => state.playlists = value,
     setPlaylist: (state, value) => state.playlist = value,
     setWord: (state, value) => {
-      state.playlist.words.push(value);
+      state.playlist.words.unshift(value);
     },
     removeWordByIndex: (state, index) => {
       state.playlist.words.splice(index, 1);
     },
     removeWordById: (state, value) => {
-      state.playlist = state.playlist.words.filter(f => f["id"] != value)
+      state.playlist.words = state.playlist.words.filter(f => f["id"] != value)
     }
   },
   actions: {
@@ -56,7 +56,7 @@ export default {
     async removeWord({commit}, payload){
       axios.delete(`playlists/${payload["playlist_id"]}/words/${payload["id"]}`).then((response) => {
         if(response.status == 200){
-          commit("removeWordById", payload["id"]);
+          commit("removeWordById", payload.id);
         }
       })
     },

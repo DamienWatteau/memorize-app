@@ -6,7 +6,9 @@ import Authentification from '@/views/Authentification.vue'
 
 import ShowPlaylist from '../views/Playlists/Show.vue'
 
-import StartQuizz from '../views/Learn/PreLearn.vue'
+import StartQuizz from '../views/Quizz/Start.vue'
+
+import PreLearn from '../views/Learn/PreLearn.vue'
 
 import store from '@/store/index'
 
@@ -34,6 +36,12 @@ const routes = [
     path: "/quizz",
     name: "quizz",
     component: StartQuizz,
+    meta:  {auth: true}
+  },
+  {
+    path: "/pre_quizz",
+    name: "pre_quizz",
+    component: PreLearn,
     meta:  {auth: true}
   }
 ]

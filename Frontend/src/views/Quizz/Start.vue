@@ -1,50 +1,43 @@
 <template>
-  <div class="start-quizz columns">
-    <div class="column is-12" v-if="loading">
-      <div class="card waiting-card">
-        <div class="card-content">
-          <h1 class="title is-3">Chargement du module en cours...</h1>
-          <i class="fa fa-2x fa-spinner"></i>
-        </div>
-      </div>
-    </div>
-    <div class="column is-narrow is-2" v-if="!loading && !quizzEnded">
-      <div class="card">
-        <div class="card-content">
+  <v-row>
+    <v-col cols="12" v-if="loading">
+      <h1 class="title is-3">Chargement du module en cours...</h1>
+      <i class="fa fa-2x fa-spinner"></i>
+    </v-col>
+    <v-col cols="2" v-if="!loading && !quizzEnded">
+      <v-card>
+        <v-card-text>
           <p>{{this.currentWordIndex+1}} / {{this.quizz.length}}</p>
           <p>{{$t('quizz.numberOfValidWords',{number: this.validWords.length})}}</p>
           <p>{{$t('quizz.numberOfWrongWords',{number: this.wrongWords.length})}}</p>
-        </div>
-      </div>
-    </div>
-    <div class="column is-narrow is-10" v-if="!loading && !quizzEnded">
-      <div class="card">
-        <div class="card-content">
+        </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col cols="10" v-if="!loading && !quizzEnded">
+      <v-card>
+        <v-card-text>
           {{this.currentWord.key}}
           <p v-if="visible">{{this.currentWord.value}}</p>
-          <form @submit.prevent="submitResponse">
-
-            <b-field><b-input v-model="form.value"></b-input></b-field>
-            <input class="button is-primary margin-bottom" :value="$t('form.submit')" type="submit" @click.prevent="checkResponse" />
-            <b-button @click="visible = true;">je sais pas</b-button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="column is-12" v-if="quizzEnded">
-      <b-button class="button is-primary" @click="resetWords">Restart</b-button>
-      <b-table
-        :data="wrongWords">
-        <b-table-column field="key" label="" v-slot="props">
-            <b-field><b-input v-model="props.row.key" disabled="true"></b-input></b-field>
-        </b-table-column>
-
-        <b-table-column field="value" label="" v-slot="props">
-            <b-field><b-input v-model="props.row.value" disabled="true"></b-input></b-field>
-        </b-table-column>
-      </b-table>
-    </div>
-  </div>
+          <v-form @submit.prevent="checkResponse">
+            <v-text-field
+              v-model="form.value"
+            ></v-text-field>
+            <v-btn class="ma-2" color="primary" @click.prevent="checkResponse">{{$t('form.submit')}}</v-btn>
+            <v-btn class="ma-2" color="secondary" @click="visible = true;">Montrer le mot</v-btn>
+          </v-form>
+        </v-card-text>
+      </v-card>
+    </v-col>
+    <v-col cols="12" v-if="quizzEnded">
+      <v-btn color="primary" @click="resetWords" v-if="wrongWords.length > 0">Restart</v-btn>
+      <v-btn color="primary" @click="resetQuizz" v-if="wrongWords.length == 0">Redémarré la série</v-btn>
+      <v-data-table
+        :headers="headers"
+        :items="wrongWords"
+        disable-pagination
+      ></v-data-table>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -56,7 +49,8 @@ export default {
         value: ""
       },
       loading: true,
-      visible: false
+      visible: false,
+      headers: [{text: "", value: "key"}, {text: "", value: "value"}]
     }
   },
   computed: {
@@ -66,6 +60,22 @@ export default {
     },
     quizzEnded(){
       return this.numberOfWordsTreated == this.quizz.length;
+    },
+    getQuizzMode(){
+      let tmp = JSON.parse(this.$route.query.step2);
+      if(tmp?.option)
+        return tmp.option;
+      else {
+        return "read";
+      }
+    },
+    getQuizzWords(){
+      let tmp = JSON.parse(this.$route.query.step1);
+      if(tmp?.option)
+        return tmp;
+      else {
+        return {option: "all"};
+      }
     }
   },
   methods: {
@@ -77,10 +87,13 @@ export default {
       this.setWordStatus(payload).then(() => {
         this.form.value = "";
       });
+    },
+    resetQuizz(){
+      location.reload();
     }
   },
   created() {
-    this.getQuizz({id: this.$route.query.id}).then(() => {
+    this.getQuizz({id: this.$route.query.id, words: this.getQuizzWords, mode: this.getQuizzMode}).then(() => {
       this.loading = false;
     });
   }

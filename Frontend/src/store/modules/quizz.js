@@ -26,7 +26,7 @@ export default {
   },
   actions: {
     async getQuizz({commit}, payload){
-      axios.get(`quizz?playlist_id=${payload.id}`).then((response) => {
+      axios.get(`quizz?playlist_id=${payload.id}&mode=${payload.mode}&words_option=${payload.words.option}&words_value=${payload.words.value}`).then((response) => {
         if (response && response.data)
           commit("setQuizz", response.data);
       })

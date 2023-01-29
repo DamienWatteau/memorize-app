@@ -8,16 +8,21 @@ import axios from "axios"
 import VueAxios from 'vue-axios'
 axios.defaults.baseURL=ApiUrl;
 Vue.use(VueAxios, axios)
-//
-// import Buefy from 'buefy'
-// import 'buefy/dist/buefy.css'
-// Vue.use(Buefy);
 
 import i18n from './i18n'
 
 import Notifications from 'vue-notification'
 import vuetify from './plugins/vuetify'
 Vue.use(Notifications)
+
+import VuetifyDialog from 'vuetify-dialog'
+import 'vuetify-dialog/dist/vuetify-dialog.css'
+
+Vue.use(VuetifyDialog, {
+  context: {
+    vuetify
+  }
+})
 
 Vue.config.productionTip = false
 

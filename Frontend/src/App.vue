@@ -9,14 +9,16 @@
       v-if="isLoggedIn"
     >
       <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          :src="require('@/assets/logo.svg')"
-          transition="scale-transition"
-          width="150"
-        />
+        <router-link to="/">
+          <v-img
+            alt="Memorize Logo"
+            class="shrink mr-2"
+            contain
+            :src="require('@/assets/logo.svg')"
+            transition="scale-transition"
+            width="150"
+          />
+        </router-link>
       </div>
 
       <v-spacer></v-spacer>
