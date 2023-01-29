@@ -10,14 +10,19 @@
           <p>{{this.currentWordIndex+1}} / {{this.quizz.length}}</p>
           <p>{{$t('quizz.numberOfValidWords',{number: this.validWords.length})}}</p>
           <p>{{$t('quizz.numberOfWrongWords',{number: this.wrongWords.length})}}</p>
+          <v-switch
+            v-model="face"
+            color="blue"
+            hide-details
+            ></v-switch>
         </v-card-text>
       </v-card>
     </v-col>
     <v-col cols="10" v-if="!loading && !quizzEnded">
       <v-card>
         <v-card-text>
-          {{this.currentWord.key}}
-          <p v-if="visible">{{this.currentWord.value}}</p>
+          {{getCurrentWordToDisplay}}
+          <p v-if="visible">{{getCurrentWordToGuess}}</p>
           <v-form @submit.prevent="checkResponse">
             <v-text-field
               v-model="form.value"
@@ -50,7 +55,8 @@ export default {
       },
       loading: true,
       visible: false,
-      headers: [{text: "", value: "key"}, {text: "", value: "value"}]
+      headers: [{text: "", value: "key"}, {text: "", value: "value"}],
+      face: false
     }
   },
   computed: {
@@ -69,6 +75,12 @@ export default {
         return "read";
       }
     },
+    getCurrentWordToDisplay(){
+      return this.face ? this.currentWord.value:this.currentWord.key
+    },
+    getCurrentWordToGuess(){
+      return this.face ? this.currentWord.key:this.currentWord.value
+    },
     getQuizzWords(){
       let tmp = JSON.parse(this.$route.query.step1);
       if(tmp?.option)
@@ -83,7 +95,7 @@ export default {
     checkResponse(){
       this.visible = false;
       let payload = this.currentWord;
-      payload["valid"] = this.form.value.toLowerCase() == this.currentWord.value.toLowerCase();
+      payload["valid"] = this.form.value.toLowerCase() == this.getCurrentWordToGuess.toLowerCase();
       this.setWordStatus(payload).then(() => {
         this.form.value = "";
       });

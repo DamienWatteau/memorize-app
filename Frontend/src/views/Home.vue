@@ -10,19 +10,19 @@
     </v-col>
 
     <v-col
-      cols="5"
+      cols="4"
       v-for="playlist in playlists" :key="playlist.name">
       <v-card elevation="4">
         <v-card-title>
           <h2>{{playlist.name}}</h2>
         </v-card-title>
         <v-card-actions>
-          <v-btn color="secondary" @click="$router.push({name: 'show_playlist', params: {id: playlist.id}})">
-            <v-icon dark left>mdi-eye</v-icon>
+          <v-btn color="secondary" small @click="$router.push({name: 'show_playlist', params: {id: playlist.id}})">
+            <v-icon dark>mdi-eye</v-icon>
             {{$t('card.view')}}
           </v-btn>
-          <v-btn color="error" @click="confirmDelete(playlist.id)"><v-icon dark left>mdi-trash-can</v-icon> {{$t('card.delete')}}</v-btn>
-          <v-btn color="info" :to="{'name': 'pre_quizz', 'query': {id: playlist.id}}"><v-icon dark left>mdi-play</v-icon> {{$t('playlist.quizz')}}</v-btn>
+          <v-btn small color="error" @click="confirmDelete(playlist.id)"><v-icon dark>mdi-trash-can</v-icon> {{$t('card.delete')}}</v-btn>
+          <v-btn small color="info" :to="{'name': 'pre_quizz', 'query': {id: playlist.id}}"><v-icon dark>mdi-play</v-icon> {{$t('playlist.quizz')}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
