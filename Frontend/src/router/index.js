@@ -6,7 +6,7 @@ import Authentification from '@/views/Authentification.vue'
 
 import ShowPlaylist from '../views/Playlists/Show.vue'
 
-import StartQuizz from '../views/Quizz/Start.vue'
+import StartQuizz from '../views/Learn/PreLearn.vue'
 
 import store from '@/store/index'
 

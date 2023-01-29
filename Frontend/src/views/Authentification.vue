@@ -1,16 +1,20 @@
 <template>
-  <div class="columns is-multiline">
-    <div class="column is-12 logo">
+  <v-row>
+    <v-col cols="12" class="logo">
       <img :src="require('@/assets/logo.svg')" />
-    </div>
-    <Login />
-    <Register />
-  </div>
+    </v-col>
+    <v-col cols="4" offset="2">
+      <Login />
+    </v-col>
+    <v-col cols="4">
+      <Register />
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-import Register from "@/views/Register"
-import Login from "@/views/Login"
+import Register from "@/views/Register";
+import Login from "@/views/Login";
 import { mapGetters, mapActions } from "vuex";
 export default {
   data: function(){

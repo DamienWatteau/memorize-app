@@ -1,61 +1,60 @@
 <template>
-  <div id="app">
+  <v-app>
     <notifications />
-    <div v-if="isLoggedIn">
-      <b-navbar>
-        <template #brand>
-          <b-navbar-item tag="router-link" :to="{ path: '/' }">
-              <img :src="require('@/assets/logo.svg')" />
-          </b-navbar-item>
-        </template>
-        <template #start>
-          <b-navbar-item tag="router-link" :to="{ path: '/' }">
-              {{$t('navbar.home')}}
-          </b-navbar-item>
-        </template>
-
-        <template #end>
-          <b-navbar-item tag="div">
-            <div class="buttons">
-                <a class="button is-light" @click="logout">
-                  {{$t('navbar.logout')}}
-                </a>
-            </div>
-          </b-navbar-item>
-        </template>
-      </b-navbar>
-      <div class="container is-fullhd">
-        <router-view/>
+    <v-app-bar
+      app
+      color="white"
+      white
+      dense
+      v-if="isLoggedIn"
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          :src="require('@/assets/logo.svg')"
+          transition="scale-transition"
+          width="150"
+        />
       </div>
-    </div>
-    <div v-else>
-      <router-view/>
-    </div>
-  </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        text
+        @click="logout"
+      >
+        {{$t('navbar.logout')}}
+      </v-btn>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <router-view/>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
 export default {
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions(["logout"])
   },
   computed: {
     ...mapGetters(["isLoggedIn"])
   },
   created() {
-    if(this.isLoggedIn != true && this.$route.name != "login")
-      this.$router.push("/");
+  if(this.isLoggedIn != true && this.$route.name != "login")
+    this.$router.push("/");
   }
-}
+};
 </script>
-
 <style lang="scss">
 #app {
   min-height: 100vh;
   background-color: #EEE;
-  .navbar {
-    margin-bottom: 30px;
-  }
 }
 </style>

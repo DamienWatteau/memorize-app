@@ -4,7 +4,9 @@ module.exports = defineConfig({
     allowedHosts: "all"
   },
 
-  transpileDependencies: true,
+  transpileDependencies: [
+    'vuetify'
+  ],
 
   pluginOptions: {
     i18n: {

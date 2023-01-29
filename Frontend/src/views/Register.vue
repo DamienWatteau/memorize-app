@@ -1,35 +1,37 @@
 <template>
-  <div class="column is-narrow is-4">
-    <div class="card">
-      <div class="card-content">
-        <p class="title">
-          {{$t("register.title")}}
-        </p>
-        <form @submit.prevent="addUser">
-          <b-field :label="$t('form.first_name')">
-            <b-input type="text"
-              v-model="form.first_name">
-            </b-input>
-          </b-field>
-          <b-field :label="$t('form.last_name')">
-            <b-input type="text"
-              v-model="form.last_name">
-            </b-input>
-          </b-field>
-          <b-field :label="$t('form.email')">
-            <b-input v-model="form.email"></b-input>
-          </b-field>
-          <b-field :label="$t('form.password')">
-            <b-input type="password"
-              v-model="form.password"
-              password-reveal>
-            </b-input>
-          </b-field>
-          <input class="button is-primary margin-bottom" :value="$t('register.form.submit')" type="submit" @click.prevent="addUser" />
-        </form>
-      </div>
-    </div>
-  </div>
+  <v-card elevation="2" dense rounded>
+    <v-card-title>
+      <h2>{{$t("register.title")}}</h2>
+    </v-card-title>
+    <v-card-text>
+      <v-form @submit.prevent="addUser">
+        <v-text-field
+          v-model="form.first_name"
+          :label="$t('form.first_name')">
+        </v-text-field>
+        <v-text-field
+          v-model="form.last_name"
+          :label="$t('form.last_name')">
+        </v-text-field>
+        <v-text-field
+          v-model="form.email"
+          :label="$t('form.email')">
+        </v-text-field>
+        <v-text-field
+          v-model="form.password"
+          :append-icon="passwordReveal ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="passwordReveal ? 'text' : 'password'"
+          :label="$t('form.password')"
+          @click:append="passwordReveal = !passwordReveal">
+        </v-text-field>
+        <v-btn
+          type="submit"
+          @click.prevent="addUser">
+          {{$t('register.form.submit')}}
+        </v-btn>
+      </v-form>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -42,7 +44,8 @@ export default {
         last_name: "",
         email: "",
         password: ""
-      }
+      },
+      passwordReveal: false
     }
   },
   computed: {

@@ -1,29 +1,29 @@
 <template>
-  <div class="column is-narrow is-offset-2 is-4">
-    <div class="card">
-      <div class="card-content">
-        <div class="columns">
-          <div class="column is-12">
-            <p class="title">
-              {{$t("login.title")}}
-            </p>
-            <form @submit.prevent="authenticate">
-              <b-field :label="$t('form.email')">
-                <b-input v-model="form.email"></b-input>
-              </b-field>
-              <b-field :label="$t('form.password')">
-                <b-input type="password"
-                  v-model="form.password"
-                  password-reveal>
-                </b-input>
-              </b-field>
-              <input class="button is-primary margin-bottom" :value="$t('login.form.submit')" type="submit" @click.prevent="authenticate" />
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <v-card elevation="2" dense rounded>
+    <v-card-title>
+      <h2>{{$t("login.title")}}</h2>
+    </v-card-title>
+    <v-card-text>
+      <v-form @submit.prevent="authenticate">
+        <v-text-field
+          v-model="form.email"
+          :label="$t('form.email')">
+        </v-text-field>
+        <v-text-field
+          v-model="form.password"
+          :append-icon="passwordReveal ? 'mdi-eye' : 'mdi-eye-off'"
+          :type="passwordReveal ? 'text' : 'password'"
+          :label="$t('form.password')"
+          @click:append="passwordReveal = !passwordReveal">
+        </v-text-field>
+        <v-btn
+          type="submit"
+          @click.prevent="authenticate">
+          {{$t('login.form.submit')}}
+        </v-btn>
+      </v-form>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
@@ -34,7 +34,8 @@ export default {
       form: {
         email: "",
         password: ""
-      }
+      },
+      passwordReveal: false
     }
   },
   computed: {
