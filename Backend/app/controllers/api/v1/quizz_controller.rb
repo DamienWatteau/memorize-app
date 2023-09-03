@@ -4,7 +4,7 @@ module Api
       def show
         words =  current_user.playlists.find(resource_params[:playlist_id]).words.order(:id => :desc)
         if resource_params[:words_option] == "x_words" && (resource_params[:words_value] != "undefined" && !(resource_params[:words_value].to_i > words.length))
-          words=words[(words.length - resource_params[:words_value].to_i)..words.length]
+          words=words[0..(resource_params[:words_value].to_i-1)]
         end
         render json: words.shuffle
       end
